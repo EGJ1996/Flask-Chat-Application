@@ -21,7 +21,8 @@ def login():
         user = User.query.filter_by(username=username).first()
         if bcrypt.check_password_hash(user.password, password):
             login_user(user, remember=remember)
-            return redirect(request.args.get('next') or url_for('main.index'))
+            # return redirect(request.args.get('next') or url_for('main.index'))
+            return render_template('auth/chat.html',form = form)
         else:
             flash('Password incorrect', category='danger')
     return render_template('auth/login.html', form=form)
